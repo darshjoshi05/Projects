@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>User Dashboard - Book Manager</title>
+    <style>
+      /* Existing styles */
+      * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #f0f4f8;
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+        margin: 0;
+      }
+
+      .navbar {
+        width: 100%;
+        background-color: #4caf50;
+        padding: 15px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        color: white;
+      }
+
+      .navbar .username {
+        font-size: 20px;
+        font-weight: bold;
+        padding-left: 15px;
+      }
+
+      .navbar ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        gap: 20px;
+      }
+
+      .navbar ul li {
+        display: inline;
+      }
+
+      .navbar ul li a {
+        color: white;
+        text-decoration: none;
+        font-size: 16px;
+        transition: text-decoration 0.3s ease;
+      }
+
+      .navbar ul li a:hover {
+        text-decoration: underline;
+      }
+
+      .container {
+        flex-grow: 1;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .search-bar {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 20px;
+        width: 100%;
+        max-width: 900px;
+      }
+
+      .search-bar select,
+      .search-bar input[type="text"],
+      .search-bar button {
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        font-size: 16px;
+      }
+
+      .search-bar select {
+        width: 25%;
+        margin-right: 10px;
+      }
+
+      .search-bar input[type="text"] {
+        flex-grow: 1;
+        margin-right: 10px;
+      }
+
+      .search-bar button {
+        background-color: #4caf50;
+        color: white;
+        border: none;
+        cursor: pointer;
+      }
+
+      .search-bar button:hover {
+        background-color: #45a049;
+      }
+
+      .books-list {
+        width: 100%;
+        max-width: 900px;
+        background-color: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      }
+
+      .books-list h2 {
+        margin-bottom: 20px;
+        font-size: 24px;
+        text-align: center;
+      }
+
+      .book-item {
+        border-bottom: 1px solid #ddd;
+        padding: 15px 0;
+      }
+
+      .book-item:last-child {
+        border-bottom: none;
+      }
+
+      .book-item h3 {
+        font-size: 20px;
+        margin-bottom: 5px;
+      }
+
+      .book-item p {
+        font-size: 16px;
+        margin: 3px 0;
+      }
+
+      .footer {
+        width: 100%;
+        background-color: #4caf50;
+        color: white;
+        text-align: center;
+        padding: 10px;
+        font-size: 14px;
+        box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.1);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="navbar">
+      <div class="username" data-th-text="${loggedUser.name}">Username</div>
+      <ul>
+        <li>
+          <a href="./dashboard.html" data-th-href="@{/user/dashboard}"
+            >Dashboard</a
+          >
+        </li>
+        <li>
+          <a href="./profile.html" data-th-href="@{/user/profile}">Profile</a>
+        </li>
+        <li>
+          <a href="./add_book.html" data-th-href="@{/user/books/add}">Add</a>
+        </li>
+        <li><a href="./books.html" data-th-href="@{/user/books}">Books</a></li>
+        <li><a href="/logout" data-th-href="@{/log-out}">Logout</a></li>
+      </ul>
+    </div>
+
+    <div class="container">
+      <form data-th-action="@{'/user/books/search'}">
+        <div class="search-bar">
+          <select name="field">
+            <option value="title">Title</option>
+            <option value="author">Author</option>
+          </select>
+          <input
+            type="text"
+            name="keyword"
+            placeholder="Search your books..."
+          />
+          <button type="submit">Search</button>
+        </div>
+      </form>
+      <div class="books-list">
+        <h2>Search Results</h2>
+        <div th:each="book : ${books}" class="book-item">
+          <h3 th:text="${book.title}">Book Title</h3>
+          <p>
+            <strong>Author:</strong>
+            <span th:text="${book.author}">Author Name</span>
+          </p>
+          <p>
+            <strong>Pages:</strong> <span th:text="${book.pages}">350</span>
+          </p>
+          <p>
+            <strong>Language:</strong>
+            <span th:text="${book.language}">English</span>
+          </p>
+          <p>
+            <strong>Category:</strong>
+            <span th:text="${book.category}">Fiction</span>
+          </p>
+          <p>
+            <strong>Publisher:</strong>
+            <span th:text="${book.publisher}">Publisher Name</span>
+          </p>
+          <p>
+            <strong>Status:</strong>
+            <span th:text="${book.status}">COMPLETED</span>
+          </p>
+          <p>
+            <strong>Description:</strong>
+            <span th:text="${book.description}">A brief description...</span>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer">&copy; 2024 Book Manager. All Rights Reserved.</div>
+  </body>
+</html>

@@ -19,7 +19,7 @@ public class PageController {
 
     @GetMapping("/home")
     public String homePage() {
-        return "home";
+        return "index";
     }
 
     @GetMapping("/log-in")
