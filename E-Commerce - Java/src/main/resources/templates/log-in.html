@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Log In - E-Commerce</title>
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #f0f4f8;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+        width: 100%;
+      }
+
+      .navbar {
+        width: 100%;
+        background-color: #4caf50;
+        padding: 15px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        color: white;
+      }
+
+      .navbar .title {
+        font-size: 24px;
+        font-weight: bold;
+      }
+
+      .navbar ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        gap: 20px;
+      }
+
+      .navbar ul li a {
+        color: white;
+        text-decoration: none;
+        font-size: 16px;
+        transition: text-decoration 0.3s ease;
+      }
+
+      .navbar ul li a:hover {
+        text-decoration: underline;
+      }
+
+      .signup-container {
+        background-color: white;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        width: 350px;
+        max-width: 90%;
+        margin: auto;
+        margin-top: auto;
+        margin-bottom: auto;
+        flex: 1;
+      }
+
+      h2 {
+        text-align: center;
+        margin-bottom: 25px;
+        font-size: 24px;
+        color: #333;
+      }
+
+      .form-group {
+        margin-bottom: 20px;
+      }
+
+      label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: bold;
+        font-size: 14px;
+        color: #555;
+      }
+
+      input[type="text"],
+      input[type="email"],
+      input[type="password"],
+      input[type="tel"],
+      textarea {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        font-size: 14px;
+        transition: border-color 0.3s ease;
+      }
+
+      input[type="text"]:focus,
+      input[type="email"]:focus,
+      input[type="password"]:focus,
+      input[type="tel"]:focus,
+      textarea:focus {
+        border-color: #4caf50;
+        outline: none;
+      }
+
+      .form-actions {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 20px;
+      }
+
+      button {
+        padding: 10px 25px;
+        border: none;
+        border-radius: 6px;
+        background-color: #4caf50;
+        color: white;
+        font-size: 14px;
+        cursor: pointer;
+        transition: background-color 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      button[type="reset"] {
+        background-color: #f44336;
+      }
+
+      button:hover {
+        background-color: #45a049;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      button[type="reset"]:hover {
+        background-color: #e53935;
+      }
+
+      .message {
+        text-align: center;
+        margin-bottom: 20px;
+        padding: 10px;
+        border-radius: 6px;
+        font-size: 14px;
+      }
+
+      .message.success {
+        background-color: #d4edda;
+        color: #155724;
+      }
+
+      .message.failure {
+        background-color: #f8d7da;
+        color: #721c24;
+      }
+
+      .logIn-btn {
+        text-align: center;
+        margin-top: 20px;
+      }
+
+      .social-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 80%;
+        max-width: 250px;
+        margin: 10px auto;
+        padding: 10px 0;
+        border-radius: 5px;
+        color: white;
+        font-size: 14px;
+        text-decoration: none;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        transition: background-color 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      .social-btn i {
+        margin-right: 10px;
+      }
+
+      .github-btn {
+        background-color: #24292e;
+      }
+
+      .github-btn:hover {
+        background-color: #1a1f23;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+      }
+
+      .footer {
+        width: 100%;
+        background-color: #4caf50;
+        color: white;
+        text-align: center;
+        padding: 10px;
+        font-size: 14px;
+        box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.1);
+        position: relative;
+        bottom: 0;
+      }
+
+      @media (max-width: 480px) {
+        .form-actions {
+          flex-direction: column;
+          gap: 10px;
+        }
+
+        button {
+          width: 100%;
+          padding: 12px 0;
+        }
+
+        .footer {
+          font-size: 12px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="navbar">
+      <div class="title">E-Commerce</div>
+      <ul>
+        <li><a href="./home.html" data-th-href="@{/}">Home</a></li>
+        <li><a href="./log-in.html" data-th-href="@{/log-in}">Log In</a></li>
+        <li><a href="./sign-in.html" data-th-href="@{/sign-in}">Sign Up</a></li>
+      </ul>
+    </div>
+
+    <div class="signup-container">
+      <h2>Log In</h2>
+      <div th:if="${success}" class="message success">
+        Registration successful! Welcome!
+      </div>
+      <div th:if="${error}" class="message failure">
+        Registration failed. Please try again.
+      </div>
+      <form
+        data-th-action="@{'/log-in'}"
+        method="post"
+        data-th-object="${user}"
+      >
+        <div class="form-group">
+          <label for="mail">Email:</label>
+          <input
+            type="text"
+            id="mail"
+            th:field="*{mail}"
+            name="mail"
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="password">Password:</label>
+          <input
+            type="password"
+            th:field="*{password}"
+            id="password"
+            name="password"
+            required
+          />
+        </div>
+        <div class="form-actions">
+          <button type="submit">Submit</button>
+          <button type="reset">Reset</button>
+        </div>
+      </form>
+    </div>
+
+    <div class="footer">&copy; 2024 E-Commerce. All Rights Reserved.</div>
+  </body>
+</html>

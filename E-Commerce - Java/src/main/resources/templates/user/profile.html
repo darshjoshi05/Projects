@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>User Details</title>
+    <style>
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #f0f4f8;
+        margin: 0;
+        padding: 0;
+      }
+
+      .navbar {
+        width: 100%;
+        background-color: #4caf50;
+        padding: 15px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        color: white;
+      }
+
+      .navbar .title {
+        font-size: 24px;
+        font-weight: bold;
+        padding-left: 15px;
+      }
+
+      .navbar ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        gap: 20px;
+      }
+
+      .navbar ul li a {
+        color: white;
+        text-decoration: none;
+        font-size: 16px;
+        transition: text-decoration 0.3s ease;
+      }
+
+      .navbar ul li a:hover {
+        text-decoration: underline;
+      }
+
+      .container {
+        display: flex;
+        justify-content: center;
+        padding: 40px;
+      }
+
+      .product-details {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background-color: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        width: 500px;
+        text-align: center;
+      }
+
+      .form-group {
+        margin-bottom: 15px;
+        text-align: left;
+      }
+
+      .form-group label {
+        display: block;
+        font-size: 16px;
+        color: #333;
+        margin-bottom: 5px;
+      }
+
+      .form-group input {
+        width: 100%;
+        padding: 8px;
+        font-size: 16px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-sizing: border-box;
+      }
+
+      .form-actions {
+        display: flex;
+        gap: 10px;
+        margin-top: 20px;
+      }
+
+      .form-actions button {
+        padding: 10px 20px;
+        font-size: 16px;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+
+      .form-actions button[type="submit"] {
+        background-color: #4caf50;
+      }
+
+      .form-actions button[type="reset"] {
+        background-color: #ff4081;
+      }
+
+      .form-actions button[type="submit"]:hover {
+        background-color: #45a049;
+      }
+
+      .form-actions button[type="reset"]:hover {
+        background-color: #e91e63;
+      }
+
+      .footer {
+        width: 100%;
+        background-color: #4caf50;
+        color: white;
+        text-align: center;
+        padding: 10px;
+        font-size: 14px;
+        box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.1);
+        position: fixed;
+        bottom: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="navbar">
+      <div class="title">E-Commerce</div>
+      <ul>
+        <li>
+          <a href="./user_products.html" data-th-href="@{/user/explore}"
+            >Explore</a
+          >
+        </li>
+        <li>
+          <a href="./profile.html" data-th-href="@{/user/profile}">Profile</a>
+        </li>
+        <li><a href="./cart.html" data-th-href="@{/user/cart}">Cart</a></li>
+        <li>
+          <a href="./wishlist.html" data-th-href="@{/user/wishlist}"
+            >Wishlist</a
+          >
+        </li>
+        <li>
+          <a href="./orders.html" data-th-href="@{/user/orders}">Orders</a>
+        </li>
+        <li><a href="./sign-in.html" data-th-href="@{/logout}">Log out</a></li>
+      </ul>
+    </div>
+
+    <div class="container">
+      <form
+        th:action="@{/user/profile/{id}(id=${user.id})}"
+        method="post"
+        data-th-object="${user}"
+        class="product-details"
+      >
+        <div class="form-group">
+          <label for="username">Name:</label>
+          <input
+            type="text"
+            id="username"
+            th:field="*{name}"
+            name="username"
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email:</label>
+          <input
+            type="email"
+            th:field="*{mail}"
+            id="email"
+            name="email"
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="password">Password:</label>
+          <input
+            type="password"
+            th:field="*{password}"
+            id="password"
+            name="password"
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="phone">Phone Number:</label>
+          <input
+            type="tel"
+            id="phone"
+            th:field="*{number}"
+            name="phone"
+            required
+          />
+        </div>
+
+        <div class="form-actions">
+          <button type="submit">Submit</button>
+          <button type="reset">Reset</button>
+        </div>
+      </form>
+    </div>
+
+    <div class="footer">
+      &copy; 2024 E-Commerce Project. All Rights Reserved.
+    </div>
+  </body>
+</html>

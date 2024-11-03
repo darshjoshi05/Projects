@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Product Details</title>
+    <style>
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #f0f4f8;
+        margin: 0;
+        padding: 0;
+      }
+
+      .navbar {
+        width: 100%;
+        background-color: #4caf50;
+        padding: 15px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        color: white;
+      }
+
+      .navbar .title {
+        font-size: 24px;
+        font-weight: bold;
+        padding-left: 15px;
+      }
+
+      .navbar ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        gap: 20px;
+      }
+
+      .navbar ul li {
+        display: inline;
+      }
+
+      .navbar ul li a {
+        color: white;
+        text-decoration: none;
+        font-size: 16px;
+        transition: text-decoration 0.3s ease;
+      }
+
+      .navbar ul li a:hover {
+        text-decoration: underline;
+      }
+
+      .container {
+        display: flex;
+        justify-content: center;
+        padding: 40px;
+      }
+
+      .product-details {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background-color: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        width: 500px;
+        text-align: center;
+      }
+
+      .product-details img {
+        width: 100%;
+        height: auto;
+        max-height: 400px;
+        border-radius: 8px;
+      }
+
+      .product-name {
+        font-size: 28px;
+        font-weight: bold;
+        color: #333;
+        margin: 20px 0 10px;
+      }
+
+      .product-price {
+        font-size: 24px;
+        color: #4caf50;
+        margin: 10px 0;
+      }
+
+      .product-description {
+        font-size: 16px;
+        color: #555;
+        margin-bottom: 20px;
+      }
+
+      .quantity {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-top: 20px;
+      }
+
+      .quantity label {
+        font-size: 16px;
+        color: #333;
+      }
+
+      .quantity input[type="number"] {
+        width: 60px;
+        padding: 5px;
+        font-size: 16px;
+        text-align: center;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+      }
+
+      .button-group {
+        display: flex;
+        gap: 10px;
+        margin-top: 20px;
+      }
+
+      .button {
+        padding: 10px 20px;
+        font-size: 16px;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+
+      .button.cart {
+        background-color: #4caf50;
+      }
+
+      .button.cart:hover {
+        background-color: #45a049;
+      }
+
+      .button.wishlist {
+        background-color: #ff4081;
+      }
+
+      .button.wishlist:hover {
+        background-color: #e91e63;
+      }
+
+      .footer {
+        width: 100%;
+        background-color: #4caf50;
+        color: white;
+        text-align: center;
+        padding: 10px;
+        font-size: 14px;
+        box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.1);
+        position: fixed;
+        bottom: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="navbar">
+      <div class="title">E-Commerce</div>
+      <ul>
+        <li>
+          <a href="./user_products.html" data-th-href="@{/user/explore}"
+            >Explore</a
+          >
+        </li>
+        <li>
+          <a href="./profile.html" data-th-href="@{/user/profile}">Profile</a>
+        </li>
+        <li><a href="./cart.html" data-th-href="@{/user/cart}">Cart</a></li>
+        <li>
+          <a href="./wishlist.html" data-th-href="@{/user/wishlist}"
+            >Wishlist</a
+          >
+        </li>
+        <li>
+          <a href="./orders.html" data-th-href="@{/user/orders}">Orders</a>
+        </li>
+        <li><a href="./sign-in.html" data-th-href="@{/logout}">Log out</a></li>
+      </ul>
+    </div>
+
+    <div class="container">
+      <div class="product-details">
+        <img
+          th:src="'data:image/jpeg;base64,' + ${product.base64Image}"
+          alt="Product Image"
+        />
+        <h1 class="product-name" th:text="${product.name}">Product Name</h1>
+        <p class="product-price" th:text="'$' + ${product.price}">
+          Product Price
+        </p>
+        <p class="product-description" th:text="${product.description}">
+          Product description goes here. This section provides details about the
+          product features, quality, and specifications.
+        </p>
+
+        <div class="quantity">
+          <label for="quantity">Quantity:</label>
+          <input
+            type="number"
+            id="quantity"
+            name="quantity"
+            min="1"
+            value="1"
+          />
+        </div>
+
+        <div class="button-group">
+          <form
+            th:action="@{/user/product/cart/{id}(id=${product.id})}"
+            method="post"
+            onsubmit="setQuantity(this)"
+          >
+            <input type="hidden" name="quantity" />
+            <button class="button cart" type="submit">Add to Cart</button>
+          </form>
+
+          <form
+            th:action="@{/user/product/wishlist/{id}(id=${product.id})}"
+            method="post"
+            onsubmit="setQuantity(this)"
+          >
+            <input type="hidden" name="quantity" />
+            <button class="button wishlist" type="submit">
+              Add to Wishlist
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer">
+      &copy; 2024 E-Commerce Project. All Rights Reserved.
+    </div>
+  </body>
+  <script>
+    function setQuantity(form) {
+      const quantity = document.getElementById("quantity").value;
+      form.querySelector('input[name="quantity"]').value = quantity;
+    }
+  </script>
+</html>

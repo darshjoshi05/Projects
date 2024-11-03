@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Wishlist Details</title>
+    <style>
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #f0f4f8;
+        margin: 0;
+        padding: 0;
+      }
+
+      .navbar {
+        width: 100%;
+        background-color: #4caf50;
+        padding: 15px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        color: white;
+        position: sticky;
+        top: 0;
+        z-index: 10;
+      }
+
+      .navbar .title {
+        font-size: 24px;
+        font-weight: bold;
+        padding-left: 15px;
+      }
+
+      .navbar ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        gap: 20px;
+      }
+
+      .navbar ul li a {
+        color: white;
+        text-decoration: none;
+        font-size: 16px;
+        transition: text-decoration 0.3s ease;
+      }
+
+      .navbar ul li a:hover {
+        text-decoration: underline;
+      }
+
+      .container {
+        padding: 40px 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 20px;
+      }
+
+      h2 {
+        margin-bottom: 20px;
+        font-size: 28px;
+        color: #333;
+      }
+
+      table {
+        width: 100%;
+        max-width: 900px;
+        border-collapse: collapse;
+        background-color: white;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        overflow: hidden;
+      }
+
+      th,
+      td {
+        padding: 15px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+      }
+
+      th {
+        background-color: #4caf50;
+        color: white;
+        font-weight: bold;
+      }
+
+      tr:hover {
+        background-color: #f1f1f1;
+      }
+
+      .button-group button {
+        padding: 10px 15px;
+        margin: 5px;
+        font-size: 14px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        color: white;
+        transition: background-color 0.3s ease;
+      }
+
+      .delete-btn {
+        background-color: #f44336;
+      }
+
+      .delete-btn:hover {
+        background-color: #d32f2f;
+      }
+
+      .order-btn {
+        background-color: #4caf50;
+      }
+
+      .order-btn:hover {
+        background-color: #45a049;
+      }
+
+      .footer {
+        width: 100%;
+        background-color: #4caf50;
+        color: white;
+        text-align: center;
+        padding: 10px;
+        font-size: 14px;
+        box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.1);
+        position: fixed;
+        bottom: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="navbar">
+      <div class="title">E-Commerce</div>
+      <ul>
+        <li>
+          <a href="./user_products.html" data-th-href="@{/user/explore}"
+            >Explore</a
+          >
+        </li>
+        <li>
+          <a href="./profile.html" data-th-href="@{/user/profile}">Profile</a>
+        </li>
+        <li><a href="./cart.html" data-th-href="@{/user/cart}">Cart</a></li>
+        <li>
+          <a href="./wishlist.html" data-th-href="@{/user/wishlist}"
+            >Wishlist</a
+          >
+        </li>
+        <li>
+          <a href="./orders.html" data-th-href="@{/user/orders}">Orders</a>
+        </li>
+        <li><a href="./sign-in.html" data-th-href="@{/logout}">Log out</a></li>
+      </ul>
+    </div>
+
+    <div class="container">
+      <h2>Wishlist Products</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Total</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr th:each="product : ${products}">
+            <td th:text="${product.name}"></td>
+            <td th:text="${product.price}"></td>
+            <td th:text="${product.quantity}"></td>
+            <td th:text="${product.total}"></td>
+            <td class="button-group">
+              <form
+                th:action="@{/user/wishlist/remove/{id}(id=${product.id})}"
+                method="post"
+                style="display: inline"
+              >
+                <button type="submit" class="delete-btn">Remove</button>
+              </form>
+              <form
+                th:action="@{/user/wishlist/cart/{id}(id=${product.id})}"
+                method="post"
+                style="display: inline"
+              >
+                <button type="submit" class="order-btn">Cart</button>
+              </form>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="footer">
+      &copy; 2024 E-Commerce Project. All Rights Reserved.
+    </div>
+  </body>
+</html>

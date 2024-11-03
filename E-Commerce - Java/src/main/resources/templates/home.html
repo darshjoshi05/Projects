@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>E Commerce - Home</title>
+    <style>
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #f0f4f8;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        width: 99vw;
+        margin: 0;
+        flex-direction: column;
+      }
+
+      .navbar {
+        width: 100%;
+        background-color: #4caf50;
+        padding: 15px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        color: white;
+      }
+
+      .navbar .title {
+        font-size: 24px;
+        font-weight: bold;
+        padding-left: 15px;
+      }
+
+      .navbar ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        gap: 20px;
+      }
+
+      .navbar ul li {
+        display: inline;
+      }
+
+      .navbar ul li a {
+        color: white;
+        text-decoration: none;
+        font-size: 16px;
+        transition: text-decoration 0.3s ease;
+      }
+
+      .navbar ul li a:hover {
+        text-decoration: underline;
+      }
+
+      .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        flex: 1;
+      }
+
+      .welcome-box {
+        background-color: white;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        max-width: 600px;
+        margin: 20px;
+      }
+
+      .welcome-box h1 {
+        font-size: 32px;
+        color: #333;
+        margin-bottom: 20px;
+      }
+
+      .welcome-box p {
+        font-size: 18px;
+        color: #555;
+      }
+
+      .footer {
+        width: 100%;
+        background-color: #4caf50;
+        color: white;
+        text-align: center;
+        padding: 10px;
+        font-size: 14px;
+        box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.1);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="navbar">
+      <div class="title">E-Commerce</div>
+      <ul>
+        <li><a href="./home.html" data-th-href="@{/}">Home</a></li>
+        <li><a href="./log-in.html" data-th-href="@{/log-in}">Log In</a></li>
+        <li><a href="./sign-in.html" data-th-href="@{/sign-in}">Sign Up</a></li>
+      </ul>
+    </div>
+
+    <div class="container">
+      <div class="welcome-box">
+        <h1>Welcome to my E-Commerce Website!</h1>
+        <p>
+          Register and log in yourself to be able to browse numerous products
+          and categories.
+        </p>
+      </div>
+    </div>
+    <div class="footer">
+      &copy; 2024 E-Commerce Project. All Rights Reserved.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Dashboard - E-Commerce</title>
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #f0f4f8;
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+        margin: 0;
+      }
+
+      .navbar {
+        width: 100%;
+        background-color: #4caf50;
+        padding: 15px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        color: white;
+      }
+
+      .navbar .username {
+        font-size: 20px;
+        font-weight: bold;
+        padding-left: 15px;
+      }
+
+      .navbar ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        gap: 20px;
+      }
+
+      .navbar ul li {
+        display: inline;
+      }
+
+      .navbar ul li a {
+        color: white;
+        text-decoration: none;
+        font-size: 16px;
+        transition: text-decoration 0.3s ease;
+      }
+
+      .navbar ul li a:hover {
+        text-decoration: underline;
+      }
+
+      .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex: 1;
+        padding: 20px;
+        flex-direction: column;
+      }
+
+      .stats {
+        background-color: white;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        margin-bottom: 20px;
+      }
+
+      .stats h2 {
+        font-size: 28px;
+        color: #333;
+        margin-bottom: 15px;
+      }
+
+      .stats p {
+        font-size: 18px;
+        color: #555;
+        margin: 10px 0;
+      }
+
+      .links {
+        display: flex;
+        justify-content: space-between;
+        gap: 20px;
+      }
+
+      .links a {
+        background-color: #4caf50;
+        color: white;
+        padding: 10px 20px;
+        border-radius: 5px;
+        text-decoration: none;
+        transition: background-color 0.3s ease;
+      }
+
+      .links a:hover {
+        background-color: #45a049;
+      }
+
+      .footer {
+        width: 100%;
+        background-color: #4caf50;
+        color: white;
+        text-align: center;
+        padding: 10px;
+        font-size: 14px;
+        box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.1);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="navbar">
+      <div class="username">Admin</div>
+      <ul>
+        <li>
+          <a
+            href="/src/main/resources/templates/admin/admin.html"
+            data-th-href="@{/admin}"
+            >Dashboard</a
+          >
+        </li>
+        <li>
+          <a href="./add_product.html" data-th-href="@{/admin/add_product}"
+            >Add Product</a
+          >
+        </li>
+        <li>
+          <a href="./add_category.html" data-th-href="@{/admin/add_category}"
+            >Add Category</a
+          >
+        </li>
+        <li><a href="/logout">Logout</a></li>
+      </ul>
+    </div>
+
+    <div class="container">
+      <div class="stats">
+        <h2>Admin Dashboard</h2>
+        <p>Total Products: <span th:text="${totalProducts}">0</span></p>
+        <p>Total Categories: <span th:text="${totalCategories}">0</span></p>
+        <p>Total Orders: <span th:text="${totalOrders}">0</span></p>
+        <p>Total Amount: <span th:text="${totalAmount}">$0</span></p>
+        <p>Total Users: <span th:text="${totalUsers}">0</span></p>
+      </div>
+
+      <div class="links">
+        <a href="./admin_orders.html" data-th-href="@{/admin/orders}"
+          >View All Orders</a
+        >
+        <a href="./users.html" data-th-href="@{/admin/users}">View All Users</a>
+        <a href="./category.html" data-th-href="@{/admin/categories}"
+          >View All Categories</a
+        >
+        <a href="./products.html" data-th-href="@{/admin/products}"
+          >View All Products</a
+        >
+      </div>
+    </div>
+
+    <div class="footer">&copy; 2024 E-Commerce. All Rights Reserved.</div>
+  </body>
+</html>
